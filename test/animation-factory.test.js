@@ -1,7 +1,13 @@
+'use strict';
+
 const factory = require('../src/animation-factory');
 
+beforeAll(async() => {
+    page.goto('http://www.google.com');
+});
+
 test('it should be able to create a move-to-middle-top animation', () => {
-    var element = document.createElement('h1');
+    const element = page.document.documentElement.createElement('h1');
     expect(element).toBeDefined();
     element.setAttribute("data-animated-duration", "1000");
     element.setAttribute("data-animated-iterations", "1");
