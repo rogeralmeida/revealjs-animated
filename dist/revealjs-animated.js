@@ -86,14 +86,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/animation-factory.js":
+/*!**********************************!*\
+  !*** ./src/animation-factory.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("var AnimationFactory = function () {\n  function middleTop(element) {\n    var topDistance = (element.offsetTop + element.parentElement.offsetTop) * -1;\n    var keyframes = {\n      transform: [\"translate(0px, 0px)\", \"translate(0px, \".concat(topDistance, \"px)\")]\n    };\n    var duration = Number(element.getAttribute(\"data-animated-duration\"));\n    var iterations = Number(element.getAttribute(\"data-animated-iterations\"));\n    var fill = element.getAttribute(\"data-animated-fill\");\n    var timing = {\n      duration: duration,\n      iterations: iterations,\n      fill: fill\n    };\n    return element.animate(keyframes, timing);\n  }\n\n  function moveTo(element) {\n    var topDistance = element.getAttribute(\"data-move-to-left\");\n    var leftDistance = element.getAttribute(\"data-move-to-top\");\n    var keyframes = {\n      transform: [\"translate(0px, 0px)\", \"translate(\".concat(leftDistance, \", \").concat(topDistance, \")\")]\n    };\n    var duration = Number(element.getAttribute(\"data-animated-duration\"));\n    var iterations = Number(element.getAttribute(\"data-animated-iterations\"));\n    var fill = element.getAttribute(\"data-animated-fill\");\n    var timing = {\n      duration: duration,\n      iterations: iterations,\n      fill: fill\n    };\n    return element.animate(keyframes, timing);\n  }\n\n  return {\n    buildAnimation: function buildAnimation(element) {\n      if (element.classList.contains('move-to-middle-top')) {\n        console.log('move-to-middle-top');\n        return middleTop(element);\n      } else if (element.classList.contains('move-to')) {\n        console.log('move-to');\n        return moveTo(element);\n      }\n    }\n  };\n}();\n\nmodule.exports = AnimationFactory;\n\n//# sourceURL=webpack:///./src/animation-factory.js?");
+
+/***/ }),
+
 /***/ "./src/revealjs-animated.js":
 /*!**********************************!*\
   !*** ./src/revealjs-animated.js ***!
   \**********************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("RevealJsAnimated = (function () {\n    return {\n        initialize: function (revealjsInstance){\n            revealjsInstance.addEventListener( 'fragmentshown', function( event ) {\n                var element = event.fragment;\n                var topDistance = (element.offsetTop + element.parentElement.offsetTop) * -1;\n                var keyframes = {transform: [\"translate(0px, 0px)\", `translate(0px, ${topDistance}px)`]};\n                var duration = Number(element.getAttribute(\"data-animated-duration\"));\n                var iterations = Number(element.getAttribute(\"data-animated-iterations\")); \n                var fill = element.getAttribute(\"data-animated-fill\"); \n                var timing = {duration: duration, iterations: iterations, fill: fill};\n                element.animate(keyframes, timing);\n            } );\n        }\n    };\n})();\n\n//# sourceURL=webpack:///./src/revealjs-animated.js?");
+eval("var AnimationFactory = __webpack_require__(/*! ./animation-factory */ \"./src/animation-factory.js\");\n\nRevealJsAnimated = function () {\n  return {\n    initialize: function initialize(revealjsInstance) {\n      revealjsInstance.addEventListener('fragmentshown', function (event) {\n        var element = event.fragment;\n        AnimationFactory.buildAnimation(element);\n      });\n    }\n  };\n}();\n\n//# sourceURL=webpack:///./src/revealjs-animated.js?");
 
 /***/ })
 
