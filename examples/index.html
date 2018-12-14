@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<script src="js/web-animations.min.js"></script>
+		<script src="js/revealjs-animated.js"></script>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 id="titulo" class="pulse fragment animated move-to-middle-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Middle Top</h1>
+					<strong>@rogeralmeidacom</strong>	
+				</section>
+				<section>
+					<h1 id="titulo-2" class="pulse fragment animated move-to-left-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</h1>
+					<strong>@rogeralmeidacom</strong>	
+				</section>
+				<section>
+					<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="100px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</p>
+					<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="-50px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</p>
+					<strong>@rogeralmeidacom</strong>	
+				</section>
+				<section>
+					<h2 class="pulse">Slide 2</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				width: "100%",
+				heigth: "100%",
+				margin: 0,
+				minScale: 1,
+				maxScale: 1,
+					dependencies: [
+						{ src: 'plugin/markdown/marked.js' },
+						{ src: 'plugin/markdown/markdown.js' },
+						{ src: 'plugin/notes/notes.js', async: true },
+						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					]
+				});
+				RevealJsAnimated.initialize(Reveal);
+			</script>
+		</body>
+	</html>
