@@ -6,11 +6,13 @@
 
 		<title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/moon.css">
+		<link rel="stylesheet" href="css/reveal.css"/>
+		<link rel="stylesheet" href="css/theme/moon.css"/>
+		<link rel="stylesheet" href="css/slides-grids.css"/>
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/a11y-dark.css">
+
 		<script src="js/web-animations.min.js"></script>
 		<script src="js/revealjs-animated.js"></script>
 		<!-- Printing and PDF exports -->
@@ -26,26 +28,90 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h1 id="titulo" class="pulse fragment animated move-to-middle-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Middle Top</h1>
-					<strong>@rogeralmeidacom</strong>	
+					<section>
+						<h1>RevealJs-Animated</h1>
+						<strong>by @rogeralmeidacom</strong>
+						<p>A extension to use web-animations inside RevealJs presentations</p>
+					</section>
+					<section>
+						<div class="grid-container">
+							<div style="grid-column-start: 2; grid-column-end: 12">
+								<h2>How to use it</h2>
+							</div>
+							<div style="grid-column-start: 3; grid-column-end: 11">
+								<p>Import the required libraries</p>
+								<pre>
+									<code class="html" data-trim>
+										<script src="js/web-animations.min.js"></script>
+										<script src="js/revealjs-animated.js"></script>	
+									</code>
+								</pre>
+							</div>
+						</div>
+					</section>
+					<section>
+						<div class="grid-container">
+							<div style="grid-column-start: 2; grid-column-end: 12">
+								<h2>How to use it</h2>
+							</div>
+							<div style="grid-column-start: 1; grid-column-end: 13">
+								<p>Add properties to the elements you want to animate</p>
+								<pre >
+									<code class="html" style="white-space: pre-line" data-trim data-noscape>
+										<h1 
+											class="fragment animated move-to-middle-top"  
+											data-animated-duration="1000" 
+											data-animated-iterations="1" 
+											data-animated-fill="forwards">
+											Animated Title
+										</h1>
+									</code>
+								</pre>
+								Have Fun!
+							</div>
+						</div>
+					</section>
 				</section>
 				<section>
-					<h1 id="titulo-2" class="pulse fragment animated move-to-left-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</h1>
-					<strong>@rogeralmeidacom</strong>	
+					<section>
+						<h1>Middle Top</h1>
+					</section>
+					<section>
+						<h1 id="titulo" class="fragment animated move-to-middle-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Middle Top</h1>
+					</section>
+					<section>
+						<pre>
+							<code class="html" style="white-space: pre-line" data-trim>
+								<h1 id="titulo" class="fragment animated move-to-middle-top" data-animated-kind="top-center" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Middle Top</h1>
+							</code>
+						</pre>						
+					</section>
 				</section>
 				<section>
-					<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="100px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</p>
-					<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="-50px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Left Top</p>
-					<strong>@rogeralmeidacom</strong>	
-				</section>
-				<section>
-					<h2 class="pulse">Slide 2</h2>
+					<section>
+						<h1>Move to specific positions</h1>
+					</section>
+					<section>
+						<h1>Move to specific positions</h1>
+						<p class="fragment animated move-to" data-move-to-left="-90px" data-move-to-top="20px" data-animated-duration="300" data-animated-iterations="1" data-animated-fill="forwards">One Item</p>
+						<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="29px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Second Item</p>
+					</section>
+					<section>
+						<h1>Move to specific positions</h1>
+						<pre>
+							<code class="html" style="white-space: pre-line" data-trim>
+								<p class="fragment animated move-to" data-move-to-left="-90px" data-move-to-top="20px" data-animated-duration="300" data-animated-iterations="1" data-animated-fill="forwards">One Item</p>
+								<p class="fragment animated move-to" data-move-to-left="100px" data-move-to-top="29px" data-animated-duration="1000" data-animated-iterations="1" data-animated-fill="forwards">Second Item</p>
+							</code>
+						</pre>
+					</section>
 				</section>
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
+		<!-- <script src="js/prism.js"></script> -->
 
 		<script>
 			// More info about config & dependencies:
@@ -55,13 +121,17 @@
 				width: "100%",
 				heigth: "100%",
 				margin: 0,
+				fragmentInURL: true,
+				slideNumber: true,
 				minScale: 1,
 				maxScale: 1,
 					dependencies: [
 						{ src: 'plugin/markdown/marked.js' },
 						{ src: 'plugin/markdown/markdown.js' },
 						{ src: 'plugin/notes/notes.js', async: true },
-						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { 
+							hljs.initHighlightingOnLoad(); 
+						} }
 					]
 				});
 				RevealJsAnimated.initialize(Reveal);
