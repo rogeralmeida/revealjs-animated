@@ -26,6 +26,12 @@ var AnimationFactory = (() => {
         return element.animate(keyframes, duration);
     }
 
+    function scaleDown(element) {
+        var keyframes = {transform: ['scale(1, 1)', 'scale(0.5, 0.5)']};
+        const duration = { duration: 1500, iterations: 1, fill: 'forwards' };
+        return element.animate(keyframes, duration);
+    }
+
     return {
         buildAnimation: (element) => {
             if (element.classList.contains('move-to-middle-top')) {
@@ -34,6 +40,8 @@ var AnimationFactory = (() => {
                 return moveTo(element);
             } else if (element.classList.contains('scale-up')){
                 return scaleUp(element);
+            } else if (element.classList.contains('scale-down')){
+                return scaleDown(element);
             }
         }
     };
