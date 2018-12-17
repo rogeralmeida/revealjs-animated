@@ -5,7 +5,7 @@ RevealJsAnimated = (function () {
         initialize: function (revealjsInstance){
             revealjsInstance.addEventListener( 'fragmenthidden', function( event ) {
                 var element = event.fragment;
-                AnimationFactory.revertAnimation(element);
+                AnimationFactory.buildAnimation(element, true);
             } );
             revealjsInstance.addEventListener( 'fragmentshown', function( event ) {
                 var element = event.fragment;

@@ -49,26 +49,15 @@ var AnimationFactory = (() => {
     }
 
     return {
-        buildAnimation: (element) => {
+        buildAnimation: (element, reverse=false) => {
             if (element.classList.contains('move-to-middle-top')) {
-                return middleTop(element);
+                return middleTop(element, reverse);
             } else if (element.classList.contains('move-to')) {
-                return moveTo(element);
+                return moveTo(element, reverse);
             } else if (element.classList.contains('scale-up')){
-                return scaleUp(element);
+                return scaleUp(element, reverse);
             } else if (element.classList.contains('scale-down')){
-                return scaleDown(element);
-            }
-        },
-        revertAnimation: (element) => {
-            if (element.classList.contains('move-to-middle-top')) {
-                return middleTop(element, true);
-            } else if (element.classList.contains('move-to')) {
-                return moveTo(element, true);
-            } else if (element.classList.contains('scale-up')){
-                return scaleUp(element, true);
-            } else if (element.classList.contains('scale-down')){
-                return scaleDown(element, true);
+                return scaleDown(element, reverse);
             }
         }
     };
