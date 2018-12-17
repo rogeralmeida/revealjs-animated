@@ -48,17 +48,24 @@ var AnimationFactory = (() => {
         return element.animate(keyframes, duration);
     }
 
+    const moveToMiddleTopClass = 'move-to-middle-top';
+    const moveToClass = 'move-to';
+    const scaleUpClass = 'scale-up';
+    const scaleDownClass = 'scale-down';
+    const methodMap = new Map();
+    methodMap.set(moveToMiddleTopClass, middleTop);
+    methodMap.set(moveToClass, moveTo);
+    methodMap.set(scaleUpClass, scaleUp);
+    methodMap.set(scaleDownClass, scaleDown);
+
     return {
         buildAnimation: (element, reverse=false) => {
-            if (element.classList.contains('move-to-middle-top')) {
-                return middleTop(element, reverse);
-            } else if (element.classList.contains('move-to')) {
-                return moveTo(element, reverse);
-            } else if (element.classList.contains('scale-up')){
-                return scaleUp(element, reverse);
-            } else if (element.classList.contains('scale-down')){
-                return scaleDown(element, reverse);
-            }
+            element.classList.forEach((clazz)=> {
+               if (methodMap.has(clazz) ){
+                   var method = methodMap.get(clazz);
+                   method(element, reverse);
+               }
+            });
         }
     };
 })();
