@@ -136,7 +136,6 @@
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 		<script src="js/web-animations.min.js"></script>
-		<script src="js/revealjs-animated.js"></script>
 
 		<script>
 			// More info about config & dependencies:
@@ -156,10 +155,10 @@
 						{ src: 'plugin/notes/notes.js', async: true },
 						{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { 
 							hljs.initHighlightingOnLoad(); 
-						} }
+						} },
+						{src: 'js/revealjs-animated.js', async: true}
 					]
 				});
-				RevealJsAnimated.initialize(Reveal);
 			</script>
 		</body>
 	</html>
