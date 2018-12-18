@@ -1,4 +1,5 @@
 var AnimationFactory = require('./animation-factory');
+var WebAnimationsJs = require('web-animations-js');
 
 var RevealJsAnimation = window.RevealJsAnimation || (() => {
     if(typeof Reveal !== 'undefined'){
