@@ -44,12 +44,17 @@ var AnimationFactory = (() => {
     }
 
     function scaleUp(element, reverse=false) {
-        var keyframes = {transform: ['scale(1, 1)', 'scale(2, 2)']};
+        const scaleFrom = getNumberAttribute(element, 'data-scale-up-from', 1);
+        const scaleTo = getNumberAttribute(element, 'data-scale-up-to', 2);
+        var keyframes = {transform: [`scale(${scaleFrom}, ${scaleFrom})`, `scale(${scaleTo}, ${scaleTo})`]};
         if(reverse){
-            keyframes = {transform: ['scale(2, 2)', 'scale(1, 1)']};
+            keyframes = {transform: [`scale(${scaleTo}, ${scaleTo})`, `scale(${scaleFrom}, ${scaleFrom})`]};
         }
-        const duration = { duration: 1500, iterations: 1, fill: 'forwards' };
-        return element.animate(keyframes, duration);
+        const duration = getNumberAttribute(element, 'data-scale-up-duration', 1500);
+        const iterations = getNumberAttribute(element, 'data-scale-up-iterations', 1);
+        const fill = getTextAttribute(element, 'data-scale-up-fill', 'forwards');
+        const time = { duration: duration, iterations: iterations, fill: fill };
+        return element.animate(keyframes, time);
     }
 
     function scaleDown(element, reverse=false) {
