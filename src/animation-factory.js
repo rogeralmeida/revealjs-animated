@@ -29,8 +29,8 @@ var AnimationFactory = (() => {
     }
 
     function moveTo(element, reverse=false){
-        var topDistance = element.getAttribute("data-move-to-left");
-        var leftDistance = element.getAttribute("data-move-to-top");
+        var leftDistance = element.getAttribute("data-move-to-left");
+        var topDistance = element.getAttribute("data-move-to-top");
         var transform = ["translate(0px, 0px)", `translate(${leftDistance}, ${topDistance})`];
         if(reverse){
             transform = [`translate(${leftDistance}, ${topDistance})`, "translate(0px, 0px)"];
