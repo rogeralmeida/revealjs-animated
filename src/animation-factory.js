@@ -29,16 +29,16 @@ var AnimationFactory = (() => {
     }
 
     function moveTo(element, reverse=false){
-        var leftDistance = element.getAttribute("data-move-to-left");
-        var topDistance = element.getAttribute("data-move-to-top");
+        var leftDistance = getTextAttribute(element, "data-move-to-left", '50px');
+        var topDistance = getTextAttribute(element, "data-move-to-top", '25px');
         var transform = ["translate(0px, 0px)", `translate(${leftDistance}, ${topDistance})`];
         if(reverse){
             transform = [`translate(${leftDistance}, ${topDistance})`, "translate(0px, 0px)"];
         }
         var keyframes = {transform: transform};
-        var duration = Number(element.getAttribute("data-animated-duration"));
-        var iterations = Number(element.getAttribute("data-animated-iterations"));
-        var fill = element.getAttribute("data-animated-fill");
+        var duration = getNumberAttribute(element, "data-animated-duration", 1000);
+        var iterations = getNumberAttribute(element, "data-animated-iterations", 1);
+        var fill = getTextAttribute(element, "data-animated-fill", 'forwards');
         var timing = {duration: duration, iterations: iterations, fill: fill};
         return element.animate(keyframes, timing);
     }
