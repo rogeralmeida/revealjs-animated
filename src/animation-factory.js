@@ -58,14 +58,18 @@ var AnimationFactory = (() => {
     }
 
     function scaleDown(element, reverse=false) {
-        var transform = ['scale(1, 1)', 'scale(0.5, 0.5)'];
+        const scaleFrom = getNumberAttribute(element, 'data-scale-down-from', 1);
+        const scaleTo = getNumberAttribute(element, 'data-scale-down-to', 0.5);
+        var transform = [`scale(${scaleFrom}, ${scaleFrom})`, `scale(${scaleTo}, ${scaleTo})`];
         if (reverse){
-            transform = ['scale(0.5, 0.5)', 'scale(1, 1)'];
+            transform = [`scale(${scaleTo}, ${scaleTo})`, `scale(${scaleFrom}, ${scaleFrom})`];
         } 
-        
-        var keyframes = {transform: transform};
-        const duration = { duration: 1500, iterations: 1, fill: 'forwards' };
-        return element.animate(keyframes, duration);
+        const keyframes = {transform: transform};
+        const duration = getNumberAttribute(element, 'data-scale-down-duration', 1500);
+        const iterations = getNumberAttribute(element, 'data-scale-down-iterations', 1);
+        const fill = getTextAttribute(element, 'data-scale-down-fill', 'forwards');
+        const time = {duration: duration, iterations: iterations, fill: fill};
+        return element.animate(keyframes, time);
     }
 
     const moveToMiddleTopClass = 'move-to-middle-top';
