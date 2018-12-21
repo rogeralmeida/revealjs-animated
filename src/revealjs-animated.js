@@ -1,7 +1,7 @@
-var AnimationFactory = require('./animation-factory');
-var WebAnimationsJs = require('web-animations-js');
+import AnimationFactory from './animation-factory';
+import 'web-animations-js';
 
-var RevealJsAnimation = window.RevealJsAnimation || (() => {
+const RevealJsAnimation = window.RevealJsAnimation || (() => {
     if(typeof Reveal !== 'undefined'){
         var style = document.createElement('style');
         style.type = 'text/css';
@@ -11,13 +11,18 @@ var RevealJsAnimation = window.RevealJsAnimation || (() => {
             }`;
         document.getElementsByTagName('head')[0].appendChild(style);
 
+        // eslint-disable-next-line no-undef
         Reveal.addEventListener( 'fragmenthidden', function( event ) {
             var element = event.fragment;
             AnimationFactory.buildAnimation(element, true);
         } );
+
+        // eslint-disable-next-line no-undef
         Reveal.addEventListener( 'fragmentshown', function( event ) {
             var element = event.fragment;
             AnimationFactory.buildAnimation(element);
         } );
     }
 })();
+
+export default RevealJsAnimation;

@@ -16,29 +16,29 @@ var AnimationFactory = (() => {
 
     function middleTop(element, reverse=false) {
         var topDistance = (element.offsetTop + element.parentElement.offsetTop) * -1;
-        var transform = ["translate(0px, 0px)", `translate(0px, ${topDistance}px)`];
+        var transform = ['translate(0px, 0px)', `translate(0px, ${topDistance}px)`];
         if (reverse){
-            transform = [`translate(0px, ${topDistance}px)`, "translate(0px, 0px)"];
+            transform = [`translate(0px, ${topDistance}px)`, 'translate(0px, 0px)'];
         }
         var keyframes = {transform: transform};
-        var duration = getNumberAttribute(element, "data-animated-duration", 1000);
-        var iterations = getNumberAttribute(element, "data-animated-iterations", 1);
-        var fill = getTextAttribute(element, "data-animated-fill", 'forwards');
+        var duration = getNumberAttribute(element, 'data-animated-duration', 1000);
+        var iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
+        var fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
         var timing = {duration: duration, iterations: iterations, fill: fill};
         return element.animate(keyframes, timing);
     }
 
     function moveTo(element, reverse=false){
-        var leftDistance = getTextAttribute(element, "data-move-to-left", '50px');
-        var topDistance = getTextAttribute(element, "data-move-to-top", '25px');
-        var transform = ["translate(0px, 0px)", `translate(${leftDistance}, ${topDistance})`];
+        var leftDistance = getTextAttribute(element, 'data-move-to-left', '50px');
+        var topDistance = getTextAttribute(element, 'data-move-to-top', '25px');
+        var transform = ['translate(0px, 0px)', `translate(${leftDistance}, ${topDistance})`];
         if(reverse){
-            transform = [`translate(${leftDistance}, ${topDistance})`, "translate(0px, 0px)"];
+            transform = [`translate(${leftDistance}, ${topDistance})`, 'translate(0px, 0px)'];
         }
         var keyframes = {transform: transform};
-        var duration = getNumberAttribute(element, "data-animated-duration", 1000);
-        var iterations = getNumberAttribute(element, "data-animated-iterations", 1);
-        var fill = getTextAttribute(element, "data-animated-fill", 'forwards');
+        var duration = getNumberAttribute(element, 'data-animated-duration', 1000);
+        var iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
+        var fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
         var timing = {duration: duration, iterations: iterations, fill: fill};
         return element.animate(keyframes, timing);
     }
@@ -85,13 +85,13 @@ var AnimationFactory = (() => {
     return {
         buildAnimation: (element, reverse=false) => {
             element.classList.forEach((clazz)=> {
-               if (methodMap.has(clazz) ){
-                   var method = methodMap.get(clazz);
-                   method(element, reverse);
-               }
+                if (methodMap.has(clazz) ){
+                    var method = methodMap.get(clazz);
+                    method(element, reverse);
+                }
             });
         }
     };
 })();
 
-module.exports = AnimationFactory;
+export default AnimationFactory;
