@@ -1,8 +1,12 @@
 {
   "name": "revealjs-animated",
-  "version": "0.0.0",
-  "description": "",
+  "version": "1.0.0",
+  "description": "RevealJs plugin to facilitate usage of animation inside slides",
   "main": "webpack.config.js",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/rogeralmeida/revealjs-animated"
+  },
   "directories": {
     "test": "test"
   },
@@ -23,5 +27,5 @@
     "test": "jest"
   },
   "author": "Roger Almeida <roger.eduardo@gmail.com>",
-  "license": "ISC"
+  "license": "MIT"
 }
