@@ -1,18 +1,32 @@
 var AnimationFactory = (() => {
 
-    function getNumberAttribute(element, attributeName, defaultValue){
+    var getNumberAttribute = (element, attributeName, defaultValue) => {
         if(!element.hasAttribute(attributeName)){
             return defaultValue;
         }
         return Number(element.getAttribute(attributeName));
-    }
+    };
 
-    function getTextAttribute(element, attributeName, defaultValue){
+    var getTextAttribute = (element, attributeName, defaultValue) => {
         if(!element.hasAttribute(attributeName)){
             return defaultValue;
         }
         return element.getAttribute(attributeName);
-    }
+    };
+
+    var rotate = (element, reverse=false) => {
+        const rotateFrom = getTextAttribute(element, 'data-animated-rotate-from', '0deg');
+        const rotateTo = getTextAttribute(element, 'data-animated-rotate-to', '180deg');
+        let keyFrames = {transform: [`rotate(${rotateFrom})`, `rotate(${rotateTo})`]};
+        if (reverse){
+            keyFrames = {transform: [`rotate(${rotateTo})`, `rotate(${rotateFrom})`]};
+        }
+        const duration = getNumberAttribute(element, 'data-animated-rotate-duration', 1000);
+        const iterations = getNumberAttribute(element, 'data-animated-rotate-iterations', 1);
+        const fill = getTextAttribute(element, 'data-animated-rotate-fill', 'forwards');
+        const timing = {duration: duration, iterations: iterations, fill: fill};
+        return element.animate(keyFrames, timing);
+    };
 
     function middleTop(element, reverse=false) {
         var topDistance = (element.offsetTop + element.parentElement.offsetTop) * -1;
@@ -76,11 +90,13 @@ var AnimationFactory = (() => {
     const moveToClass = 'move-to';
     const scaleUpClass = 'scale-up';
     const scaleDownClass = 'scale-down';
+    const rotateClass = 'rotate';
     const methodMap = new Map();
     methodMap.set(moveToMiddleTopClass, middleTop);
     methodMap.set(moveToClass, moveTo);
     methodMap.set(scaleUpClass, scaleUp);
     methodMap.set(scaleDownClass, scaleDown);
+    methodMap.set(rotateClass, rotate);
 
     return {
         buildAnimation: (element, reverse=false) => {
