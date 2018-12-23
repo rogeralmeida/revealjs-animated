@@ -1,1 +1,0 @@
-../../dist/revealjs-animated.js
