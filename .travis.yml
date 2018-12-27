@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- stable
+- '6'
+- '4'
+deploy:
+  provider: npm
+  email: roger.eduardo@gmail.com
+  api_key:
+    secure: Md1TsSqAl7oRXTaS1Tk7M36EEfYcCf5t0nMMVHpFVMqMl3g3KQcf6tfW71ixSEejIl1Mz7IIf6clpOrhuP1b38MstPRerkxqHWhpCotSEf2QnWXabi/CIjFft6GljErslpCqdx1lpRK9MlNybLVWYm/pOpjg2rkQXzVAdPi7iX0AFtrhdFXBf30l8wvvTfGhTEBkQXH3opb7e5Wt7z0PiP7xEZ23o0By6j9sqIyA3h0zHG96CzMr43UcROot3zSebyCPh2eyfHoBE6DoK4gXxD9fbM5y155BIyIxpzv0omQg/UexNi4QBZgk49cxndY3MUw9OP2M+U2DPmSvjdkKsUSHtrw4llEhcXnMsgcjFUpdJB/bfXZDzy8g1Vkt5BPTytNCfv+PcrzGU7Ol6OXnXB7heQrKqq9Udj9WpUUHG9TNX1N88D2uVTbi111uyMLdjUAl+ofXdGryFRbqEYMt1K6bDJJQk9g1Q1gnrRZL5ILaCnaS+nPqYRaXaQwYDlDfCUlNaYg9gy7Ifj1rvJoifi5EKDqo3iYHc9Y1tzyqxcBQCgdKJOjGpZAC2ZuP8cMETcsxa4bamQrR2o/us77LcwvZt4gcmtwrAzk0akLYoeLm/ZZ6VrLgf117n+7vIAio5NGgzXkfGtzDqwqD1sOeITrg4BcDZ8GvFv7aigaq5cU=
+  on:
+    tags: true
+    repo: rogeralmeida/revealjs-animated
