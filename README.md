@@ -17,6 +17,11 @@ This is a revealjs plugin to facilitate the usage of animations inside your slid
         ]
     });
 ```
+## How does it work?
+This plugin will look for specific classes to define how to animated elements inside your RevealJs slides.
+For now, it is meant to be used with revealjs `fragments`.
+The class `animated` is required to keep the element visible.
+
 ## Usage
 
 ### Move to MIDDLE TOP
@@ -73,3 +78,17 @@ This is a revealjs plugin to facilitate the usage of animations inside your slid
 |data-scale-down-duration|No|1500|Animation duration time in miliseconds|
 |data-scale-down-iterations|No|1|How many iterations should the animation have|
 |data-scale-down-fill|No|forwards|Final state of the animation. Possible values are `forwards`, `none`, `backwards`, `both`, `auto`. More details on [MDN: EffectTiming.fill](https://developer.mozilla.org/en-US/docs/Web/API/EffectTiming/fill)
+
+### Rotate
+```html
+    <p class="fragment animated rotate">Rotate!</p>
+```
+#### Attributes
+
+|Name|Required|Default Value|Description|
+|---|---|---|---|
+|data-scale-rotate-from|No|`0deg`|Transformation starting point|
+|data-scale-rotate-to|No|`180deg`|Transformation ending position|
+|data-scale-rotate-duration|No|1000|Animation duration time in miliseconds|
+|data-scale-rotate-iterations|No|1|How many iterations should the animation have|
+|data-scale-rotate-fill|No|forwards|Final state of the animation. Possible values are `forwards`, `none`, `backwards`, `both`, `auto`. More details on [MDN: EffectTiming.fill](https://developer.mozilla.org/en-US/docs/Web/API/EffectTiming/fill)
