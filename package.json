@@ -1,6 +1,6 @@
 {
   "name": "revealjs-animated",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "RevealJs plugin to facilitate usage of animation inside slides",
   "main": "webpack.config.js",
   "repository": {
