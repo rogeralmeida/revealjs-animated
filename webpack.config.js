@@ -9,6 +9,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'revealjs-animated.js'
     },
+    devtool: 'source-map',
     module: {
         rules: [{
             test: /\.js$/,
