@@ -14,76 +14,69 @@ var AnimationFactory = (() => {
         return element.getAttribute(attributeName);
     };
 
-    var rotate = (element, reverse=false) => {
+    const rotate = (element, reverse=false, animations=[{transform: ''}, {transform: ''}]) => {
         const rotateFrom = getTextAttribute(element, 'data-animated-rotate-from', '0deg');
         const rotateTo = getTextAttribute(element, 'data-animated-rotate-to', '180deg');
-        let keyFrames = {transform: [`rotate(${rotateFrom})`, `rotate(${rotateTo})`]};
-        if (reverse){
-            keyFrames = {transform: [`rotate(${rotateTo})`, `rotate(${rotateFrom})`]};
+        
+        if (!reverse){ //Sorry for the little Yoda language here
+            animations[0].transform += ` rotate(${rotateFrom}) `;
+            animations[1].transform += ` rotate(${rotateTo}) `;
+        } else {
+            animations[1].transform += ` rotate(${rotateFrom}) `;
+            animations[0].transform += ` rotate(${rotateTo}) `;
         }
-        const duration = getNumberAttribute(element, 'data-animated-rotate-duration', 1000);
-        const iterations = getNumberAttribute(element, 'data-animated-rotate-iterations', 1);
-        const fill = getTextAttribute(element, 'data-animated-rotate-fill', 'forwards');
-        const timing = {duration: duration, iterations: iterations, fill: fill};
-        return element.animate(keyFrames, timing);
+        return animations;
     };
 
-    function middleTop(element, reverse=false) {
+    const middleTop = (element, reverse=false, animations=[{transform: ''}, {transform: ''}]) => {
         var topDistance = (element.offsetTop + element.parentElement.offsetTop) * -1;
-        var transform = ['translate(0px, 0px)', `translate(0px, ${topDistance}px)`];
-        if (reverse){
-            transform = [`translate(0px, ${topDistance}px)`, 'translate(0px, 0px)'];
+        if (!reverse){
+            animations[0].transform += ' translate(0px, 0px)';
+            animations[1].transform += ` translate(0px, ${topDistance}px)`;
+        } else {
+            animations[1].transform += ' translate(0px, 0px)';
+            animations[0].transform += ` translate(0px, ${topDistance}px)`;
         }
-        var keyframes = {transform: transform};
-        var duration = getNumberAttribute(element, 'data-animated-duration', 1000);
-        var iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
-        var fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
-        var timing = {duration: duration, iterations: iterations, fill: fill};
-        return element.animate(keyframes, timing);
-    }
+        return animations;
+    };
 
-    function moveTo(element, reverse=false){
+    function moveTo(element, reverse=false, animations=[{transform: ''}, {transform: ''}]){
         var leftDistance = getTextAttribute(element, 'data-move-to-left', '50px');
         var topDistance = getTextAttribute(element, 'data-move-to-top', '25px');
-        var transform = ['translate(0px, 0px)', `translate(${leftDistance}, ${topDistance})`];
-        if(reverse){
-            transform = [`translate(${leftDistance}, ${topDistance})`, 'translate(0px, 0px)'];
+        if (!reverse){
+            animations[0].transform += ' translate(0px, 0px)';
+            animations[1].transform += ` translate(${leftDistance}, ${topDistance})`;
+        } else {
+            animations[1].transform += ' translate(0px, 0px)';
+            animations[0].transform += ` translate(${leftDistance}, ${topDistance})`;
         }
-        var keyframes = {transform: transform};
-        var duration = getNumberAttribute(element, 'data-animated-duration', 1000);
-        var iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
-        var fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
-        var timing = {duration: duration, iterations: iterations, fill: fill};
-        return element.animate(keyframes, timing);
+        return animations;
     }
 
-    function scaleUp(element, reverse=false) {
+    function scaleUp(element, reverse=false, animations=[{transform: ''}, {transform: ''}]) {
         const scaleFrom = getNumberAttribute(element, 'data-scale-up-from', 1);
         const scaleTo = getNumberAttribute(element, 'data-scale-up-to', 2);
-        var keyframes = {transform: [`scale(${scaleFrom}, ${scaleFrom})`, `scale(${scaleTo}, ${scaleTo})`]};
-        if(reverse){
-            keyframes = {transform: [`scale(${scaleTo}, ${scaleTo})`, `scale(${scaleFrom}, ${scaleFrom})`]};
+        if (!reverse){
+            animations[0].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
+            animations[1].transform += ` scale(${scaleTo}, ${scaleTo})`;
+        } else {
+            animations[1].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
+            animations[0].transform += ` scale(${scaleTo}, ${scaleTo})`;
         }
-        const duration = getNumberAttribute(element, 'data-scale-up-duration', 1500);
-        const iterations = getNumberAttribute(element, 'data-scale-up-iterations', 1);
-        const fill = getTextAttribute(element, 'data-scale-up-fill', 'forwards');
-        const time = { duration: duration, iterations: iterations, fill: fill };
-        return element.animate(keyframes, time);
+        return animations;
     }
 
-    function scaleDown(element, reverse=false) {
+    function scaleDown(element, reverse=false, animations=[{transform: ''}, {transform: ''}]) {
         const scaleFrom = getNumberAttribute(element, 'data-scale-down-from', 1);
         const scaleTo = getNumberAttribute(element, 'data-scale-down-to', 0.5);
-        var transform = [`scale(${scaleFrom}, ${scaleFrom})`, `scale(${scaleTo}, ${scaleTo})`];
-        if (reverse){
-            transform = [`scale(${scaleTo}, ${scaleTo})`, `scale(${scaleFrom}, ${scaleFrom})`];
-        } 
-        const keyframes = {transform: transform};
-        const duration = getNumberAttribute(element, 'data-scale-down-duration', 1500);
-        const iterations = getNumberAttribute(element, 'data-scale-down-iterations', 1);
-        const fill = getTextAttribute(element, 'data-scale-down-fill', 'forwards');
-        const time = {duration: duration, iterations: iterations, fill: fill};
-        return element.animate(keyframes, time);
+        if (!reverse){
+            animations[0].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
+            animations[1].transform += ` scale(${scaleTo}, ${scaleTo})`;
+        } else {
+            animations[1].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
+            animations[0].transform += ` scale(${scaleTo}, ${scaleTo})`;
+        }
+        return animations;
     }
 
     const moveToMiddleTopClass = 'move-to-middle-top';
@@ -100,12 +93,18 @@ var AnimationFactory = (() => {
 
     return {
         buildAnimation: (element, reverse=false) => {
+            let animations = [{transform: ''}, {transform: ''}];
             element.classList.forEach((clazz)=> {
                 if (methodMap.has(clazz) ){
                     var method = methodMap.get(clazz);
-                    method(element, reverse);
+                    animations = method(element, reverse, animations);
                 }
             });
+            const duration = getNumberAttribute(element, 'data-animated-duration', 1500);
+            const iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
+            const fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
+            const time = {duration: duration, iterations: iterations, fill: fill};
+            return element.animate(animations, time);
         }
     };
 })();
