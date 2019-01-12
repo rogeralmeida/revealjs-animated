@@ -122,6 +122,30 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var AnimationFactory = function () {
+  var ATTRIBUTE_PREFIX = 'data-animated';
+  var MOVE_TO_LEFT_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-move-to-left");
+  var MOVE_TO_TOP_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-move-to-top");
+  var ROTATE_FROM_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-rotate-from");
+  var ROTATE_TO_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-rotate-to");
+  var SCALE_UP_FROM_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-scale-up-from");
+  var SCALE_UP_TO_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-scale-up-to");
+  var SCALE_DOWN_FROM_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-scale-down-from");
+  var SCALE_DOWN_TO_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-scale-down-to");
+  var DURATION_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-duration");
+  var ITERATIONS_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-iterations");
+  var FILL_ATTRIBUTE = "".concat(ATTRIBUTE_PREFIX, "-fill");
+  var DEFAULT_ROTATE_FROM = '0deg';
+  var DEFAULT_ROTATE_TO = '180deg';
+  var DEFAULT_MOVE_TO_LEFT = '50px';
+  var DEFAULT_MOVE_TO_TOP = '25px';
+  var DEFAULT_SCALE_UP_FROM = 1;
+  var DEFAULT_SCALE_UP_TO = 2;
+  var DEFAULT_SCALE_DOWN_FROM = 1;
+  var DEFAULT_SCALE_DOWN_TO = 0.5;
+  var DEFAULT_DURATION = 1500;
+  var DEFAULT_FILL = 'forwards';
+  var DEFAULT_ITERATIONS = 1;
+
   var getNumberAttribute = function getNumberAttribute(element, attributeName, defaultValue) {
     if (!element.hasAttribute(attributeName)) {
       return defaultValue;
@@ -145,8 +169,8 @@ var AnimationFactory = function () {
     }, {
       transform: ''
     }];
-    var rotateFrom = getTextAttribute(element, 'data-animated-rotate-from', '0deg');
-    var rotateTo = getTextAttribute(element, 'data-animated-rotate-to', '180deg');
+    var rotateFrom = getTextAttribute(element, ROTATE_FROM_ATTRIBUTE, DEFAULT_ROTATE_FROM);
+    var rotateTo = getTextAttribute(element, ROTATE_TO_ATTRIBUTE, DEFAULT_ROTATE_TO);
 
     if (!reverse) {
       //Sorry for the little Yoda language here
@@ -187,8 +211,8 @@ var AnimationFactory = function () {
     }, {
       transform: ''
     }];
-    var leftDistance = getTextAttribute(element, 'data-move-to-left', '50px');
-    var topDistance = getTextAttribute(element, 'data-move-to-top', '25px');
+    var leftDistance = getTextAttribute(element, MOVE_TO_LEFT_ATTRIBUTE, DEFAULT_MOVE_TO_LEFT);
+    var topDistance = getTextAttribute(element, MOVE_TO_TOP_ATTRIBUTE, DEFAULT_MOVE_TO_TOP);
 
     if (!reverse) {
       animations[0].transform += ' translate(0px, 0px)';
@@ -208,8 +232,8 @@ var AnimationFactory = function () {
     }, {
       transform: ''
     }];
-    var scaleFrom = getNumberAttribute(element, 'data-scale-up-from', 1);
-    var scaleTo = getNumberAttribute(element, 'data-scale-up-to', 2);
+    var scaleFrom = getNumberAttribute(element, SCALE_UP_FROM_ATTRIBUTE, DEFAULT_SCALE_UP_FROM);
+    var scaleTo = getNumberAttribute(element, SCALE_UP_TO_ATTRIBUTE, DEFAULT_SCALE_UP_TO);
 
     if (!reverse) {
       animations[0].transform += " scale(".concat(scaleFrom, ", ").concat(scaleFrom, ")");
@@ -229,8 +253,8 @@ var AnimationFactory = function () {
     }, {
       transform: ''
     }];
-    var scaleFrom = getNumberAttribute(element, 'data-scale-down-from', 1);
-    var scaleTo = getNumberAttribute(element, 'data-scale-down-to', 0.5);
+    var scaleFrom = getNumberAttribute(element, SCALE_DOWN_FROM_ATTRIBUTE, DEFAULT_SCALE_DOWN_FROM);
+    var scaleTo = getNumberAttribute(element, SCALE_DOWN_TO_ATTRIBUTE, DEFAULT_SCALE_DOWN_TO);
 
     if (!reverse) {
       animations[0].transform += " scale(".concat(scaleFrom, ", ").concat(scaleFrom, ")");
@@ -268,9 +292,9 @@ var AnimationFactory = function () {
           animations = method(element, reverse, animations);
         }
       });
-      var duration = getNumberAttribute(element, 'data-animated-duration', 1500);
-      var iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
-      var fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
+      var duration = getNumberAttribute(element, DURATION_ATTRIBUTE, DEFAULT_DURATION);
+      var iterations = getNumberAttribute(element, ITERATIONS_ATTRIBUTE, DEFAULT_ITERATIONS);
+      var fill = getTextAttribute(element, FILL_ATTRIBUTE, DEFAULT_FILL);
       var time = {
         duration: duration,
         iterations: iterations,

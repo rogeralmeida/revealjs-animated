@@ -1,4 +1,28 @@
 var AnimationFactory = (() => {
+    const ATTRIBUTE_PREFIX              = 'data-animated';
+    const MOVE_TO_LEFT_ATTRIBUTE        = `${ATTRIBUTE_PREFIX}-move-to-left`;
+    const MOVE_TO_TOP_ATTRIBUTE         = `${ATTRIBUTE_PREFIX}-move-to-top`;
+    const ROTATE_FROM_ATTRIBUTE         = `${ATTRIBUTE_PREFIX}-rotate-from`;
+    const ROTATE_TO_ATTRIBUTE           = `${ATTRIBUTE_PREFIX}-rotate-to`;
+    const SCALE_UP_FROM_ATTRIBUTE       = `${ATTRIBUTE_PREFIX}-scale-up-from`;
+    const SCALE_UP_TO_ATTRIBUTE         = `${ATTRIBUTE_PREFIX}-scale-up-to`;
+    const SCALE_DOWN_FROM_ATTRIBUTE     = `${ATTRIBUTE_PREFIX}-scale-down-from`;
+    const SCALE_DOWN_TO_ATTRIBUTE       = `${ATTRIBUTE_PREFIX}-scale-down-to`;
+    const DURATION_ATTRIBUTE            = `${ATTRIBUTE_PREFIX}-duration`;
+    const ITERATIONS_ATTRIBUTE          = `${ATTRIBUTE_PREFIX}-iterations`;
+    const FILL_ATTRIBUTE                = `${ATTRIBUTE_PREFIX}-fill`;
+
+    const DEFAULT_ROTATE_FROM       = '0deg';
+    const DEFAULT_ROTATE_TO         = '180deg';
+    const DEFAULT_MOVE_TO_LEFT      = '50px';
+    const DEFAULT_MOVE_TO_TOP       = '25px';
+    const DEFAULT_SCALE_UP_FROM     = 1;
+    const DEFAULT_SCALE_UP_TO       = 2;
+    const DEFAULT_SCALE_DOWN_FROM   = 1;
+    const DEFAULT_SCALE_DOWN_TO     = 0.5;
+    const DEFAULT_DURATION          = 1500;
+    const DEFAULT_FILL              = 'forwards';
+    const DEFAULT_ITERATIONS        = 1;
 
     var getNumberAttribute = (element, attributeName, defaultValue) => {
         if(!element.hasAttribute(attributeName)){
@@ -15,8 +39,8 @@ var AnimationFactory = (() => {
     };
 
     const rotate = (element, reverse=false, animations=[{transform: ''}, {transform: ''}]) => {
-        const rotateFrom = getTextAttribute(element, 'data-animated-rotate-from', '0deg');
-        const rotateTo = getTextAttribute(element, 'data-animated-rotate-to', '180deg');
+        const rotateFrom = getTextAttribute(element, ROTATE_FROM_ATTRIBUTE, DEFAULT_ROTATE_FROM);
+        const rotateTo = getTextAttribute(element, ROTATE_TO_ATTRIBUTE, DEFAULT_ROTATE_TO);
         
         if (!reverse){ //Sorry for the little Yoda language here
             animations[0].transform += ` rotate(${rotateFrom}) `;
@@ -41,8 +65,8 @@ var AnimationFactory = (() => {
     };
 
     function moveTo(element, reverse=false, animations=[{transform: ''}, {transform: ''}]){
-        var leftDistance = getTextAttribute(element, 'data-move-to-left', '50px');
-        var topDistance = getTextAttribute(element, 'data-move-to-top', '25px');
+        var leftDistance = getTextAttribute(element, MOVE_TO_LEFT_ATTRIBUTE, DEFAULT_MOVE_TO_LEFT);
+        var topDistance = getTextAttribute(element, MOVE_TO_TOP_ATTRIBUTE, DEFAULT_MOVE_TO_TOP);
         if (!reverse){
             animations[0].transform += ' translate(0px, 0px)';
             animations[1].transform += ` translate(${leftDistance}, ${topDistance})`;
@@ -54,8 +78,8 @@ var AnimationFactory = (() => {
     }
 
     function scaleUp(element, reverse=false, animations=[{transform: ''}, {transform: ''}]) {
-        const scaleFrom = getNumberAttribute(element, 'data-scale-up-from', 1);
-        const scaleTo = getNumberAttribute(element, 'data-scale-up-to', 2);
+        const scaleFrom = getNumberAttribute(element, SCALE_UP_FROM_ATTRIBUTE, DEFAULT_SCALE_UP_FROM);
+        const scaleTo = getNumberAttribute(element, SCALE_UP_TO_ATTRIBUTE, DEFAULT_SCALE_UP_TO);
         if (!reverse){
             animations[0].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
             animations[1].transform += ` scale(${scaleTo}, ${scaleTo})`;
@@ -67,8 +91,8 @@ var AnimationFactory = (() => {
     }
 
     function scaleDown(element, reverse=false, animations=[{transform: ''}, {transform: ''}]) {
-        const scaleFrom = getNumberAttribute(element, 'data-scale-down-from', 1);
-        const scaleTo = getNumberAttribute(element, 'data-scale-down-to', 0.5);
+        const scaleFrom = getNumberAttribute(element, SCALE_DOWN_FROM_ATTRIBUTE, DEFAULT_SCALE_DOWN_FROM);
+        const scaleTo = getNumberAttribute(element, SCALE_DOWN_TO_ATTRIBUTE, DEFAULT_SCALE_DOWN_TO);
         if (!reverse){
             animations[0].transform += ` scale(${scaleFrom}, ${scaleFrom})`;
             animations[1].transform += ` scale(${scaleTo}, ${scaleTo})`;
@@ -100,9 +124,9 @@ var AnimationFactory = (() => {
                     animations = method(element, reverse, animations);
                 }
             });
-            const duration = getNumberAttribute(element, 'data-animated-duration', 1500);
-            const iterations = getNumberAttribute(element, 'data-animated-iterations', 1);
-            const fill = getTextAttribute(element, 'data-animated-fill', 'forwards');
+            const duration = getNumberAttribute(element, DURATION_ATTRIBUTE, DEFAULT_DURATION);
+            const iterations = getNumberAttribute(element, ITERATIONS_ATTRIBUTE, DEFAULT_ITERATIONS);
+            const fill = getTextAttribute(element, FILL_ATTRIBUTE, DEFAULT_FILL);
             const time = {duration: duration, iterations: iterations, fill: fill};
             return element.animate(animations, time);
         }
