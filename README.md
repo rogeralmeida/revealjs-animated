@@ -1,6 +1,10 @@
 # RevealJs-Animated
 
-This is a revealjs plugin to facilitate the usage of animations inside your slides.
+A revealjs plugin to facilitate the usage of animations inside your slides.
+
+[![Build Status](https://travis-ci.org/rogeralmeida/revealjs-animated.svg?branch=master)](https://travis-ci.org/rogeralmeida/revealjs-animated)
+
+[Check out the examples](https://rogeralmeida.github.io/revealjs-animated-examples/)
 
 ## How to install
 1) Install the plugin on your revealjs presentation folder
