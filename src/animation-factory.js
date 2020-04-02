@@ -108,6 +108,7 @@ var AnimationFactory = (() => {
     const scaleUpClass = 'scale-up';
     const scaleDownClass = 'scale-down';
     const rotateClass = 'rotate';
+    const animateParentClass = 'animate-parent';
     const methodMap = new Map();
     methodMap.set(moveToMiddleTopClass, middleTop);
     methodMap.set(moveToClass, moveTo);
@@ -118,6 +119,11 @@ var AnimationFactory = (() => {
     return {
         buildAnimation: (element, reverse=false) => {
             let animations = [{transform: ''}, {transform: ''}];
+            element.classList.forEach((clazz)=> {
+                if (clazz == animateParentClass){
+                    element = element.parentElement;
+                }
+            });
             element.classList.forEach((clazz)=> {
                 if (methodMap.has(clazz) ){
                     var method = methodMap.get(clazz);
